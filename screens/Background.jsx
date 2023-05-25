@@ -75,7 +75,7 @@ export default function Background({image}) {
   return (
     <View style={styles.container}>
         <View ref={viewRef}>
-            <Text>Helllloooo</Text>
+            <Text>Helllloooo rohitttt</Text>
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         </View>
         <Button icon="content-save" mode="elevated" onPress={downloadImage}>Save</Button>
