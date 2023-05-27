@@ -1,18 +1,13 @@
-import React,{useState} from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { Button } from 'react-native-paper';
+import React from "react";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { Button } from "react-native-paper";
 
-export default function Welcome({image, setImage, navigation}) {
-
-  // const [image, setImage] = useState(null);
-
+export default function Welcome({ image, setImage, navigation }) {
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      // aspect: [4, 3],
       quality: 1,
     });
 
@@ -20,25 +15,31 @@ export default function Welcome({image, setImage, navigation}) {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      navigation.navigate('Background')
+      navigation.navigate("Edit");
     }
   };
 
   return (
-    <View style={styles.container}>
-    <Button icon="camera-image" mode="elevated" onPress={pickImage}>
-    Choose Image
-  </Button>
-  {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-    </View>
-  )
+    <ImageBackground source={require("../assets/background.jpg")} resizeMode="cover" style={styles.container}>
+      <Button labelStyle={{ fontSize: 20 }} style={styles.btn} icon="camera-image" mode="elevated" onPress={pickImage}>
+        Choose Image
+      </Button>
+    </ImageBackground>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
+  btn:{
+    display:"flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height:50,
+
+  }
 });
